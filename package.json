@@ -1,0 +1,38 @@
+{
+  "name": "sow-sdk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "npm run build",
+    "build": "tsc"
+  },
+  "keywords": [
+    "sow-sdk",
+    "api",
+    "sdk",
+    "ENS"
+  ],
+  "author": "yuma",
+  "license": "MIT",
+  "dependencies": {
+    "@ensdomains/ensjs": "^3.0.0-alpha.65",
+    "@siddomains/sidjs": "^0.1.29",
+    "@unstoppabledomains/resolution": "^9.1.0",
+    "cosm": "^0.1.0",
+    "dotbit": "^0.4.22",
+    "ethers": "^5.7.2",
+    "zksync-web3": "^0.14.3"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.1.6"
+  }
+}
