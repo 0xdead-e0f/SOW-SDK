@@ -8,5 +8,6 @@ export declare enum SupportedChains {
     StargazeDomains = 6,
     Bonfida = 7,
     SuiNs = 8,
-    None = 9
+    AptosNs = 9,
+    None = 10
 }

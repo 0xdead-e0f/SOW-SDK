@@ -23,6 +23,16 @@ export function detectNameService(domainName: String) : SupportedChains {
             return SupportedChains.DotBit;
         case "era" || "zk":
             return SupportedChains.Zkns;
+        case "osmo":
+            return SupportedChains.ICNS;
+        case "stars":
+            return SupportedChains.StargazeDomains;
+        case "sol":
+            return SupportedChains.Bonfida;
+        case "apt":
+            return SupportedChains.AptosNs;
+        default:
+            return SupportedChains.ICNS;
             
     }
     

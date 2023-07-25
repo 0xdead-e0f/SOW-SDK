@@ -9,18 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAddressZKns = void 0;
-const zkns_abi_1 = require("../abi/zkns_abi");
-const ethers_1 = require("ethers");
-const zksync_web3_1 = require("zksync-web3");
-const c_address = "0x935442AF47F3dc1c11F006D551E13769F12eab13";
-function getAddressZKns(domainName) {
+exports.getAddressAptos = void 0;
+function getAddressAptos(domainName) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const provider = new zksync_web3_1.Provider("https://mainnet.era.zksync.io");
-            const contract = yield new ethers_1.ethers.Contract(c_address, zkns_abi_1.zknsAbi, provider);
-            const [, domain, topLevelDomain] = domainName.match(/^(.+)\.([^.]+)$/) || [];
-            const address = yield contract.resolveAddress(domain);
+            const response = yield fetch(`https://www.aptosnames.com/api/mainnet/v1/address/${domainName}`);
+            const { address } = yield response.json();
             return address;
         }
         catch (err) {
@@ -28,4 +22,4 @@ function getAddressZKns(domainName) {
         }
     });
 }
-exports.getAddressZKns = getAddressZKns;
+exports.getAddressAptos = getAddressAptos;

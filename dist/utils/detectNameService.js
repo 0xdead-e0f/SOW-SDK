@@ -24,6 +24,16 @@ function detectNameService(domainName) {
             return types_1.SupportedChains.DotBit;
         case "era" || "zk":
             return types_1.SupportedChains.Zkns;
+        case "osmo":
+            return types_1.SupportedChains.ICNS;
+        case "stars":
+            return types_1.SupportedChains.StargazeDomains;
+        case "sol":
+            return types_1.SupportedChains.Bonfida;
+        case "apt":
+            return types_1.SupportedChains.AptosNs;
+        default:
+            return types_1.SupportedChains.ICNS;
     }
     return types_1.SupportedChains.None;
 }

@@ -9,23 +9,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAddressZKns = void 0;
-const zkns_abi_1 = require("../abi/zkns_abi");
-const ethers_1 = require("ethers");
-const zksync_web3_1 = require("zksync-web3");
-const c_address = "0x935442AF47F3dc1c11F006D551E13769F12eab13";
-function getAddressZKns(domainName) {
+exports.getAddressICNS = void 0;
+const cosmwasm_stargate_1 = require("@cosmjs/cosmwasm-stargate");
+const resolverAddress = "osmo1xk0s8xgktn9x5vwcgtjdxqzadg88fgn33p8u9cnpdxwemvxscvast52cdd";
+function getAddressICNS(domainName) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const provider = new zksync_web3_1.Provider("https://mainnet.era.zksync.io");
-            const contract = yield new ethers_1.ethers.Contract(c_address, zkns_abi_1.zknsAbi, provider);
-            const [, domain, topLevelDomain] = domainName.match(/^(.+)\.([^.]+)$/) || [];
-            const address = yield contract.resolveAddress(domain);
-            return address;
+            const client = yield cosmwasm_stargate_1.CosmWasmClient.connect("https://rpc.osmosis.zone");
+            // const queryClient = new contracts.IcnsResolver.IcnsResolverQueryClient(client as any, resolverAddress);
+            // const {bech32_address} = await queryClient.addressByIcns({icns: domainName});
+            const { bech32_address } = yield client.queryContractSmart(resolverAddress, {
+                address_by_icns: {
+                    "icns": domainName
+                }
+            });
+            return bech32_address;
         }
         catch (err) {
             throw err;
         }
     });
 }
-exports.getAddressZKns = getAddressZKns;
+exports.getAddressICNS = getAddressICNS;

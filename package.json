@@ -18,12 +18,15 @@
   "author": "yuma",
   "license": "MIT",
   "dependencies": {
+    "@bonfida/spl-name-service": "^1.0.6",
+    "@cosmjs/cosmwasm-stargate": "^0.28.11",
     "@ensdomains/ensjs": "^3.0.0-alpha.65",
     "@siddomains/sidjs": "^0.1.29",
+    "@solana/web3.js": "^1.78.0",
     "@unstoppabledomains/resolution": "^9.1.0",
-    "cosm": "^0.1.0",
     "dotbit": "^0.4.22",
     "ethers": "^5.7.2",
+    "sgnames.js": "^0.1.1",
     "zksync-web3": "^0.14.3"
   },
   "devDependencies": {

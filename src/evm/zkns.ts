@@ -8,8 +8,8 @@ export async function getAddressZKns(domainName: string) {
     try{
         const provider = new Provider("https://mainnet.era.zksync.io");
         const contract = await new ethers.Contract(c_address, zknsAbi, provider);
-        const name = domainName.split('.').at(0);
-        const address = await contract.resolveAddress(name);
+        const [, domain, topLevelDomain] = domainName.match(/^(.+)\.([^.]+)$/) || [];
+        const address = await contract.resolveAddress(domain);
         return address;
     } catch (err) {
         throw err;

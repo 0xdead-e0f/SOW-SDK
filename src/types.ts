@@ -8,5 +8,6 @@ export enum SupportedChains {
     StargazeDomains,
     Bonfida,
     SuiNs,
+    AptosNs,
     None,
 }

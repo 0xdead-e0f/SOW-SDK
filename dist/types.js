@@ -12,5 +12,6 @@ var SupportedChains;
     SupportedChains[SupportedChains["StargazeDomains"] = 6] = "StargazeDomains";
     SupportedChains[SupportedChains["Bonfida"] = 7] = "Bonfida";
     SupportedChains[SupportedChains["SuiNs"] = 8] = "SuiNs";
-    SupportedChains[SupportedChains["None"] = 9] = "None";
+    SupportedChains[SupportedChains["AptosNs"] = 9] = "AptosNs";
+    SupportedChains[SupportedChains["None"] = 10] = "None";
 })(SupportedChains || (exports.SupportedChains = SupportedChains = {}));

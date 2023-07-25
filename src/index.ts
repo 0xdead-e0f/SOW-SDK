@@ -3,6 +3,10 @@ import { getAddressENS } from './evm/ens';
 import { getAddressResolution } from './evm/resolution';
 import { getAddressSID } from './evm/sid';
 import { getAddressZKns } from './evm/zkns';
+import { getAddressAptos } from './non-evm/aptosns';
+import { getAddressICNS } from './non-evm/icns';
+import { getAddressSolana } from './non-evm/solana';
+import { getAddressStargaze } from './non-evm/stargaze';
 import { SupportedChains } from './types';
 import { detectNameService } from './utils/detectNameService';
 
@@ -42,6 +46,14 @@ export class SoWsdk {
                 return getAddressDotBit(domainName);
             case SupportedChains.Zkns:
                 return getAddressZKns(domainName);
+            case SupportedChains.ICNS:
+                return getAddressICNS(domainName);
+            case SupportedChains.StargazeDomains:
+                return getAddressStargaze(domainName);
+            case SupportedChains.Bonfida:
+                return getAddressSolana(domainName);
+            case SupportedChains.AptosNs:
+                return getAddressAptos(domainName);
             default:
                 return "Not supported name service";
         }

@@ -15,6 +15,10 @@ const ens_1 = require("./evm/ens");
 const resolution_1 = require("./evm/resolution");
 const sid_1 = require("./evm/sid");
 const zkns_1 = require("./evm/zkns");
+const aptosns_1 = require("./non-evm/aptosns");
+const icns_1 = require("./non-evm/icns");
+const solana_1 = require("./non-evm/solana");
+const stargaze_1 = require("./non-evm/stargaze");
 const types_1 = require("./types");
 const detectNameService_1 = require("./utils/detectNameService");
 let ethProviderUrl = "";
@@ -47,6 +51,14 @@ class SoWsdk {
                     return (0, dotbit_1.getAddressDotBit)(domainName);
                 case types_1.SupportedChains.Zkns:
                     return (0, zkns_1.getAddressZKns)(domainName);
+                case types_1.SupportedChains.ICNS:
+                    return (0, icns_1.getAddressICNS)(domainName);
+                case types_1.SupportedChains.StargazeDomains:
+                    return (0, stargaze_1.getAddressStargaze)(domainName);
+                case types_1.SupportedChains.Bonfida:
+                    return (0, solana_1.getAddressSolana)(domainName);
+                case types_1.SupportedChains.AptosNs:
+                    return (0, aptosns_1.getAddressAptos)(domainName);
                 default:
                     return "Not supported name service";
             }

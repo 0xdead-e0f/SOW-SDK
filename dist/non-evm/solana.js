@@ -9,23 +9,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAddressZKns = void 0;
-const zkns_abi_1 = require("../abi/zkns_abi");
-const ethers_1 = require("ethers");
-const zksync_web3_1 = require("zksync-web3");
-const c_address = "0x935442AF47F3dc1c11F006D551E13769F12eab13";
-function getAddressZKns(domainName) {
+exports.getAddressSolana = void 0;
+const dist_1 = require("@bonfida/spl-name-service/dist");
+const web3_js_1 = require("@solana/web3.js");
+function getAddressSolana(domainName) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const provider = new zksync_web3_1.Provider("https://mainnet.era.zksync.io");
-            const contract = yield new ethers_1.ethers.Contract(c_address, zkns_abi_1.zknsAbi, provider);
-            const [, domain, topLevelDomain] = domainName.match(/^(.+)\.([^.]+)$/) || [];
-            const address = yield contract.resolveAddress(domain);
-            return address;
+            const connection = new web3_js_1.Connection((0, web3_js_1.clusterApiUrl)("mainnet-beta"));
+            const address = yield (0, dist_1.resolve)(connection, domainName);
+            return address.toBase58();
         }
         catch (err) {
             throw err;
         }
     });
 }
-exports.getAddressZKns = getAddressZKns;
+exports.getAddressSolana = getAddressSolana;
