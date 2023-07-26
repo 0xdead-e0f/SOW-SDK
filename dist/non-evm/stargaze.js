@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAddressStargaze = void 0;
+exports.getNameStargaze = exports.getAddressStargaze = void 0;
 const SGNames = require("sgnames.js");
 // import SGNames from "sgnames.js";
 function getAddressStargaze(domainName) {
@@ -25,3 +25,15 @@ function getAddressStargaze(domainName) {
     });
 }
 exports.getAddressStargaze = getAddressStargaze;
+function getNameStargaze(address) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const name = yield SGNames.fetchNameOfAddress(address);
+            return name;
+        }
+        catch (err) {
+            throw err;
+        }
+    });
+}
+exports.getNameStargaze = getNameStargaze;

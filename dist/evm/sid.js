@@ -9,12 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAddressSID = void 0;
+exports.getNameSID = exports.getAddressSID = void 0;
 const ethers_1 = require("ethers");
 const SID = require('@siddomains/sidjs').default;
 const SIDfunctions = require('@siddomains/sidjs');
 const rpc = require('@siddomains/sidjs/dist/constants/rpc');
-function getAddressSID(domainName, providerUrl) {
+function getAddressSID(domainName) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const provider = new ethers_1.ethers.providers.JsonRpcProvider(rpc.apis.bsc_mainnet);
@@ -28,3 +28,17 @@ function getAddressSID(domainName, providerUrl) {
     });
 }
 exports.getAddressSID = getAddressSID;
+function getNameSID(address) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const provider = new ethers_1.ethers.providers.JsonRpcProvider(rpc.apis.bsc_mainnet);
+            const sid = new SID({ provider, sidAddress: SIDfunctions.getSidAddress('56') });
+            const { name } = yield sid.getName(address);
+            return name;
+        }
+        catch (err) {
+            throw err;
+        }
+    });
+}
+exports.getNameSID = getNameSID;

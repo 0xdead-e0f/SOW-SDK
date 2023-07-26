@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAddressAptos = void 0;
+exports.getNameAptos = exports.getAddressAptos = void 0;
 function getAddressAptos(domainName) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -23,3 +23,16 @@ function getAddressAptos(domainName) {
     });
 }
 exports.getAddressAptos = getAddressAptos;
+function getNameAptos(address) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield fetch(`https://www.aptosnames.com/api/mainnet/v1/name/${address}`);
+            const { name } = yield response.json();
+            return name;
+        }
+        catch (err) {
+            throw err;
+        }
+    });
+}
+exports.getNameAptos = getNameAptos;

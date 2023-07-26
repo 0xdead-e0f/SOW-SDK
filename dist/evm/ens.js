@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAddressENS = void 0;
+exports.getNameENS = exports.getAddressENS = void 0;
 const ethers_1 = require("ethers");
 function getAddressENS(domainName, providerUrl) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -24,3 +24,16 @@ function getAddressENS(domainName, providerUrl) {
     });
 }
 exports.getAddressENS = getAddressENS;
+function getNameENS(address, providerUrl) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const provider = new ethers_1.ethers.providers.JsonRpcProvider(providerUrl);
+            const name = yield provider.lookupAddress(address);
+            return name;
+        }
+        catch (err) {
+            throw err;
+        }
+    });
+}
+exports.getNameENS = getNameENS;

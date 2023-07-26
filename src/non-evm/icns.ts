@@ -22,3 +22,24 @@ export async function getAddressICNS(domainName: string) {
     }
 
 }
+
+export async function getNameICNS(address: string) {
+    try{
+        const client = await CosmWasmClient.connect("https://rpc.osmosis.zone");
+        // const queryClient = new contracts.IcnsResolver.IcnsResolverQueryClient(client as any, resolverAddress);
+        // const {bech32_address} = await queryClient.addressByIcns({icns: domainName});
+
+        const {name}= await client.queryContractSmart(resolverAddress, 
+                {
+                    primary_name: {
+                        address
+                    }
+                }
+            );
+
+        return name;
+    } catch(err) {
+        throw err;
+    }
+
+}

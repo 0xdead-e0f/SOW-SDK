@@ -9,14 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAddressSolana = void 0;
-const dist_1 = require("@bonfida/spl-name-service/dist");
+exports.getNameSolana = exports.getAddressSolana = void 0;
+// import { resolve } from "@bonfida/spl-name-service";
 const web3_js_1 = require("@solana/web3.js");
+const bonfida = require("@bonfida/spl-name-service");
 function getAddressSolana(domainName) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const connection = new web3_js_1.Connection((0, web3_js_1.clusterApiUrl)("mainnet-beta"));
-            const address = yield (0, dist_1.resolve)(connection, domainName);
+            const address = yield bonfida.resolve(connection, domainName);
             return address.toBase58();
         }
         catch (err) {
@@ -25,3 +26,16 @@ function getAddressSolana(domainName) {
     });
 }
 exports.getAddressSolana = getAddressSolana;
+function getNameSolana(address) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const connection = new web3_js_1.Connection((0, web3_js_1.clusterApiUrl)("mainnet-beta"));
+            const name = yield bonfida.performReverseLookup(connection, new web3_js_1.PublicKey(address));
+            return name;
+        }
+        catch (err) {
+            throw err;
+        }
+    });
+}
+exports.getNameSolana = getNameSolana;

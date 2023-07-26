@@ -7,3 +7,13 @@ export async function getAddressAptos(domainName: string) {
         throw err;
     }
 }
+
+export async function getNameAptos(address: string) {
+    try{
+        const response = await fetch(`https://www.aptosnames.com/api/mainnet/v1/name/${address}`);
+        const {name} = await response.json();
+        return name;
+    } catch(err) {
+        throw err;
+    }
+}

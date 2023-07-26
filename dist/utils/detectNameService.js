@@ -18,11 +18,11 @@ function detectNameService(domainName) {
             return types_1.SupportedChains.ENS;
         case "bnb":
             return types_1.SupportedChains.SpaceId;
-        case "crypto" || "x" || "polygon" || "zil":
+        case "crypto" || "x" || "polygon" || "zil" || "nft" || "wallet" || "dao" || "blockchain" || "bitcoin":
             return types_1.SupportedChains.UnstoppableDomains;
         case "bit":
             return types_1.SupportedChains.DotBit;
-        case "era" || "zk":
+        case "zk":
             return types_1.SupportedChains.Zkns;
         case "osmo":
             return types_1.SupportedChains.ICNS;

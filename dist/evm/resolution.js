@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAddressResolution = void 0;
+exports.getNameResolution = exports.getAddressResolution = void 0;
 const resolution_1 = require("@unstoppabledomains/resolution");
 function getAddressResolution(domainName, ethProviderUrl, polygonProviderUrl) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -43,3 +43,35 @@ function getAddressResolution(domainName, ethProviderUrl, polygonProviderUrl) {
     });
 }
 exports.getAddressResolution = getAddressResolution;
+function getNameResolution(address, ethProviderUrl, polygonProviderUrl) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const resolution = new resolution_1.Resolution({
+                sourceConfig: {
+                    uns: {
+                        locations: {
+                            Layer1: {
+                                url: ethProviderUrl,
+                                network: 'mainnet',
+                            },
+                            Layer2: {
+                                url: polygonProviderUrl,
+                                network: 'polygon-mainnet',
+                            },
+                        },
+                    },
+                    zns: {
+                        url: 'https://api.zilliqa.com',
+                        network: 'mainnet',
+                    },
+                },
+            });
+            const name = yield resolution.reverse(address);
+            return name;
+        }
+        catch (err) {
+            throw err;
+        }
+    });
+}
+exports.getNameResolution = getNameResolution;

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAddressICNS = void 0;
+exports.getNameICNS = exports.getAddressICNS = void 0;
 const cosmwasm_stargate_1 = require("@cosmjs/cosmwasm-stargate");
 const resolverAddress = "osmo1xk0s8xgktn9x5vwcgtjdxqzadg88fgn33p8u9cnpdxwemvxscvast52cdd";
 function getAddressICNS(domainName) {
@@ -31,3 +31,22 @@ function getAddressICNS(domainName) {
     });
 }
 exports.getAddressICNS = getAddressICNS;
+function getNameICNS(address) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const client = yield cosmwasm_stargate_1.CosmWasmClient.connect("https://rpc.osmosis.zone");
+            // const queryClient = new contracts.IcnsResolver.IcnsResolverQueryClient(client as any, resolverAddress);
+            // const {bech32_address} = await queryClient.addressByIcns({icns: domainName});
+            const { name } = yield client.queryContractSmart(resolverAddress, {
+                primary_name: {
+                    address
+                }
+            });
+            return name;
+        }
+        catch (err) {
+            throw err;
+        }
+    });
+}
+exports.getNameICNS = getNameICNS;

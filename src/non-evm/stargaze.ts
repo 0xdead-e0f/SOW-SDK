@@ -9,5 +9,13 @@ export async function getAddressStargaze(domainName: string) {
     } catch(err) {
         throw err;
     }
+}
 
+export async function getNameStargaze(address: string) {
+    try{
+        const name = await SGNames.fetchNameOfAddress(address);
+        return name;
+    } catch(err) {
+        throw err;
+    }
 }

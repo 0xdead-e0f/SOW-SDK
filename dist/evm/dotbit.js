@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAddressDotBit = void 0;
+exports.getNameDotBit = exports.getAddressDotBit = void 0;
 const dotbit_1 = require("dotbit");
 const dotbit = (0, dotbit_1.createInstance)();
 function getAddressDotBit(domainName) {
@@ -19,3 +19,10 @@ function getAddressDotBit(domainName) {
     });
 }
 exports.getAddressDotBit = getAddressDotBit;
+function getNameDotBit(address) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { account } = yield dotbit.accountById(address);
+        return account;
+    });
+}
+exports.getNameDotBit = getNameDotBit;

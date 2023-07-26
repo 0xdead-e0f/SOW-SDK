@@ -10,3 +10,13 @@ export async function getAddressENS(domainName:string, providerUrl: string) {
         throw err;
     }
 }
+
+export async function getNameENS(address:string, providerUrl: string) {
+    try{
+        const provider = new ethers.providers.JsonRpcProvider(providerUrl);
+        const name = await provider.lookupAddress(address);
+        return name!;
+    } catch (err) {
+        throw err;
+    }
+}

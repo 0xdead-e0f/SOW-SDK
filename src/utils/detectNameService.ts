@@ -17,11 +17,11 @@ export function detectNameService(domainName: String) : SupportedChains {
             return SupportedChains.ENS;
         case "bnb":
             return SupportedChains.SpaceId;
-        case "crypto" || "x" || "polygon" || "zil":
+        case "crypto" || "x" || "polygon" || "zil" || "nft" || "wallet" || "dao" || "blockchain" || "bitcoin":
             return SupportedChains.UnstoppableDomains;
         case "bit":
             return SupportedChains.DotBit;
-        case "era" || "zk":
+        case "zk":
             return SupportedChains.Zkns;
         case "osmo":
             return SupportedChains.ICNS;
