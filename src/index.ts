@@ -7,6 +7,7 @@ import { getAddressAptos, getNameAptos } from './non-evm/aptosns';
 import { getAddressICNS, getNameICNS } from './non-evm/icns';
 import { getAddressSolana, getNameSolana } from './non-evm/solana';
 import { getAddressStargaze, getNameStargaze } from './non-evm/stargaze';
+import { getAddressSui } from './non-evm/suins';
 import { SupportedChains } from './types';
 import { detectNameService } from './utils/detectNameService';
 
@@ -58,6 +59,8 @@ export class SoWsdk {
                 return getAddressStargaze(domainName);
             case SupportedChains.Bonfida:
                 return getAddressSolana(domainName);
+            case SupportedChains.SuiNs:
+                return getAddressSui(domainName);
             case SupportedChains.AptosNs:
                 return getAddressAptos(domainName);
             default:

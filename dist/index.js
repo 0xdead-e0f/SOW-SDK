@@ -19,6 +19,7 @@ const aptosns_1 = require("./non-evm/aptosns");
 const icns_1 = require("./non-evm/icns");
 const solana_1 = require("./non-evm/solana");
 const stargaze_1 = require("./non-evm/stargaze");
+const suins_1 = require("./non-evm/suins");
 const types_1 = require("./types");
 const detectNameService_1 = require("./utils/detectNameService");
 let ethProviderUrl = "";
@@ -63,6 +64,8 @@ class SoWsdk {
                     return (0, stargaze_1.getAddressStargaze)(domainName);
                 case types_1.SupportedChains.Bonfida:
                     return (0, solana_1.getAddressSolana)(domainName);
+                case types_1.SupportedChains.SuiNs:
+                    return (0, suins_1.getAddressSui)(domainName);
                 case types_1.SupportedChains.AptosNs:
                     return (0, aptosns_1.getAddressAptos)(domainName);
                 default:

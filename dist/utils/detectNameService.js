@@ -30,6 +30,8 @@ function detectNameService(domainName) {
             return types_1.SupportedChains.StargazeDomains;
         case "sol":
             return types_1.SupportedChains.Bonfida;
+        case "sui":
+            return types_1.SupportedChains.SuiNs;
         case "apt":
             return types_1.SupportedChains.AptosNs;
         default:

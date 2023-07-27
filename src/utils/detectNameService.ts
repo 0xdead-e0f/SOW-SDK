@@ -29,6 +29,8 @@ export function detectNameService(domainName: String) : SupportedChains {
             return SupportedChains.StargazeDomains;
         case "sol":
             return SupportedChains.Bonfida;
+        case "sui":
+            return SupportedChains.SuiNs;
         case "apt":
             return SupportedChains.AptosNs;
         default:
