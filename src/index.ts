@@ -7,18 +7,19 @@ import { getAddressAptos, getNameAptos } from './non-evm/aptosns';
 import { getAddressICNS, getNameICNS } from './non-evm/icns';
 import { getAddressSolana, getNameSolana } from './non-evm/solana';
 import { getAddressStargaze, getNameStargaze } from './non-evm/stargaze';
-import { getAddressSui } from './non-evm/suins';
+import { getAddressSui, getNameSui } from './non-evm/suins';
 import { SupportedChains } from './types';
 import { detectNameService } from './utils/detectNameService';
 
 let ethProviderUrl: string = "";
 let polygonProviderUrl: string = "";
 let bnbProviderUrl: string = "";
-
+let suiProviderUrl: string = "https://sui.getblock.io/3b3d419a-32f2-40f0-a0fc-9a7da31a227c/mainnet/";
 export interface ProviderUrlsProps {
     eth?: string,
     polygon?: string,
     bnb?: string,    
+    sui?: string,
 }
 
 export class SoWsdk {
@@ -26,11 +27,13 @@ export class SoWsdk {
         ethProviderUrl = param?.eth!;
         polygonProviderUrl = param?.polygon!;
         bnbProviderUrl = param?.bnb!; 
+        suiProviderUrl = param?.sui? param?.sui : suiProviderUrl;
     }
     public async setProviderUrl(param: ProviderUrlsProps) {
-        ethProviderUrl = param.eth!;
-        polygonProviderUrl = param.polygon!;
-        bnbProviderUrl = param.bnb!;    
+        ethProviderUrl = param.eth?param.eth:ethProviderUrl;
+        polygonProviderUrl = param.polygon?param.polygon: polygonProviderUrl;
+        bnbProviderUrl = param.bnb? param.bnb : bnbProviderUrl;    
+        suiProviderUrl = param.sui? param?.sui: suiProviderUrl;
     }
 
     public async resolveAddress(domainName: string, ns?: SupportedChains) {
@@ -60,7 +63,7 @@ export class SoWsdk {
             case SupportedChains.Bonfida:
                 return getAddressSolana(domainName);
             case SupportedChains.SuiNs:
-                return getAddressSui(domainName);
+                return getAddressSui(domainName, suiProviderUrl);
             case SupportedChains.AptosNs:
                 return getAddressAptos(domainName);
             default:
@@ -88,6 +91,8 @@ export class SoWsdk {
                 return getNameSolana(address);
             case SupportedChains.AptosNs:
                 return getNameAptos(address);
+            case SupportedChains.SuiNs:
+                return getNameSui(address, suiProviderUrl);
             default:
                 return "Not supported name service";
         }

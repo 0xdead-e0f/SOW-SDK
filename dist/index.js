@@ -25,17 +25,20 @@ const detectNameService_1 = require("./utils/detectNameService");
 let ethProviderUrl = "";
 let polygonProviderUrl = "";
 let bnbProviderUrl = "";
+let suiProviderUrl = "https://sui.getblock.io/3b3d419a-32f2-40f0-a0fc-9a7da31a227c/mainnet/";
 class SoWsdk {
     constructor(param) {
         ethProviderUrl = param === null || param === void 0 ? void 0 : param.eth;
         polygonProviderUrl = param === null || param === void 0 ? void 0 : param.polygon;
         bnbProviderUrl = param === null || param === void 0 ? void 0 : param.bnb;
+        suiProviderUrl = (param === null || param === void 0 ? void 0 : param.sui) ? param === null || param === void 0 ? void 0 : param.sui : suiProviderUrl;
     }
     setProviderUrl(param) {
         return __awaiter(this, void 0, void 0, function* () {
-            ethProviderUrl = param.eth;
-            polygonProviderUrl = param.polygon;
-            bnbProviderUrl = param.bnb;
+            ethProviderUrl = param.eth ? param.eth : ethProviderUrl;
+            polygonProviderUrl = param.polygon ? param.polygon : polygonProviderUrl;
+            bnbProviderUrl = param.bnb ? param.bnb : bnbProviderUrl;
+            suiProviderUrl = param.sui ? param === null || param === void 0 ? void 0 : param.sui : suiProviderUrl;
         });
     }
     resolveAddress(domainName, ns) {
@@ -65,7 +68,7 @@ class SoWsdk {
                 case types_1.SupportedChains.Bonfida:
                     return (0, solana_1.getAddressSolana)(domainName);
                 case types_1.SupportedChains.SuiNs:
-                    return (0, suins_1.getAddressSui)(domainName);
+                    return (0, suins_1.getAddressSui)(domainName, suiProviderUrl);
                 case types_1.SupportedChains.AptosNs:
                     return (0, aptosns_1.getAddressAptos)(domainName);
                 default:
@@ -94,6 +97,8 @@ class SoWsdk {
                     return (0, solana_1.getNameSolana)(address);
                 case types_1.SupportedChains.AptosNs:
                     return (0, aptosns_1.getNameAptos)(address);
+                case types_1.SupportedChains.SuiNs:
+                    return (0, suins_1.getNameSui)(address, suiProviderUrl);
                 default:
                     return "Not supported name service";
             }

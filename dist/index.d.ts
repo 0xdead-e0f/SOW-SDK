@@ -3,6 +3,7 @@ export interface ProviderUrlsProps {
     eth?: string;
     polygon?: string;
     bnb?: string;
+    sui?: string;
 }
 export declare class SoWsdk {
     constructor(param?: ProviderUrlsProps);
