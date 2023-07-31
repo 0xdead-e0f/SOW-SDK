@@ -22,22 +22,22 @@ const stargaze_1 = require("./non-evm/stargaze");
 const suins_1 = require("./non-evm/suins");
 const types_1 = require("./types");
 const detectNameService_1 = require("./utils/detectNameService");
-let ethProviderUrl = "";
-let polygonProviderUrl = "";
-let bnbProviderUrl = "";
+let ethProviderUrl = "https://eth.llamarpc.com";
+let polygonProviderUrl = "https://polygon-rpc.com/";
+let bnbProviderUrl = "https://rpc.ankr.com/bsc";
 let suiProviderUrl = "https://sui.getblock.io/3b3d419a-32f2-40f0-a0fc-9a7da31a227c/mainnet/";
 class SoWsdk {
     constructor(param) {
-        ethProviderUrl = param === null || param === void 0 ? void 0 : param.eth;
-        polygonProviderUrl = param === null || param === void 0 ? void 0 : param.polygon;
-        bnbProviderUrl = param === null || param === void 0 ? void 0 : param.bnb;
+        ethProviderUrl = (param === null || param === void 0 ? void 0 : param.eth) ? param === null || param === void 0 ? void 0 : param.eth : ethProviderUrl;
+        polygonProviderUrl = (param === null || param === void 0 ? void 0 : param.polygon) ? param === null || param === void 0 ? void 0 : param.polygon : polygonProviderUrl;
+        bnbProviderUrl = (param === null || param === void 0 ? void 0 : param.bnb) ? param === null || param === void 0 ? void 0 : param.bnb : bnbProviderUrl;
         suiProviderUrl = (param === null || param === void 0 ? void 0 : param.sui) ? param === null || param === void 0 ? void 0 : param.sui : suiProviderUrl;
     }
     setProviderUrl(param) {
         return __awaiter(this, void 0, void 0, function* () {
-            ethProviderUrl = param.eth ? param.eth : ethProviderUrl;
-            polygonProviderUrl = param.polygon ? param.polygon : polygonProviderUrl;
-            bnbProviderUrl = param.bnb ? param.bnb : bnbProviderUrl;
+            ethProviderUrl = (param === null || param === void 0 ? void 0 : param.eth) ? param === null || param === void 0 ? void 0 : param.eth : ethProviderUrl;
+            polygonProviderUrl = (param === null || param === void 0 ? void 0 : param.polygon) ? param === null || param === void 0 ? void 0 : param.polygon : polygonProviderUrl;
+            bnbProviderUrl = (param === null || param === void 0 ? void 0 : param.bnb) ? param === null || param === void 0 ? void 0 : param.bnb : bnbProviderUrl;
             suiProviderUrl = param.sui ? param === null || param === void 0 ? void 0 : param.sui : suiProviderUrl;
         });
     }

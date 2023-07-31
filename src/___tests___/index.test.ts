@@ -2,11 +2,7 @@ import { SoWsdk } from '../index';
 import { SupportedChains } from '../types';
 
 describe('testing resolveAddress function', ()=>{
-    const sowsdk = new SoWsdk({
-        eth: "https://rough-autumn-gadget.quiknode.pro/fd6b09de651121334bb6cbb079684a6b8c29e2f9/",
-        polygon: "https://blue-morning-moon.matic.quiknode.pro/e94e05dc0f36703a7aaa55c2e8694b59ad920ff3/",
-        bnb: "https://tiniest-soft-aura.bsc.quiknode.pro/74216d3d2e033a7c39dff1aa40dd69435d13ea32/"
-    });
+    const sowsdk = new SoWsdk();
 
     test('ENS', ()=>{
         return sowsdk.resolveAddress("alice.eth").then((address: string)=>{
@@ -70,11 +66,7 @@ describe('testing resolveAddress function', ()=>{
 });
 
 describe('testing resolveName function', ()=>{
-    const sowsdk = new SoWsdk({
-        eth: "https://rough-autumn-gadget.quiknode.pro/fd6b09de651121334bb6cbb079684a6b8c29e2f9/",
-        polygon: "https://blue-morning-moon.matic.quiknode.pro/e94e05dc0f36703a7aaa55c2e8694b59ad920ff3/",
-        bnb: "https://tiniest-soft-aura.bsc.quiknode.pro/74216d3d2e033a7c39dff1aa40dd69435d13ea32/"
-    });
+    const sowsdk = new SoWsdk();
 
     test('ENS', ()=>{
         return sowsdk.resolveName("0x5555763613a12D8F3e73be831DFf8598089d3dCa", SupportedChains.ENS).then((name: string)=>{

@@ -11,9 +11,9 @@ import { getAddressSui, getNameSui } from './non-evm/suins';
 import { SupportedChains } from './types';
 import { detectNameService } from './utils/detectNameService';
 
-let ethProviderUrl: string = "";
-let polygonProviderUrl: string = "";
-let bnbProviderUrl: string = "";
+let ethProviderUrl: string = "https://eth.llamarpc.com";
+let polygonProviderUrl: string = "https://polygon-rpc.com/";
+let bnbProviderUrl: string = "https://rpc.ankr.com/bsc";
 let suiProviderUrl: string = "https://sui.getblock.io/3b3d419a-32f2-40f0-a0fc-9a7da31a227c/mainnet/";
 export interface ProviderUrlsProps {
     eth?: string,
@@ -24,15 +24,15 @@ export interface ProviderUrlsProps {
 
 export class SoWsdk {
     constructor (param?: ProviderUrlsProps) {
-        ethProviderUrl = param?.eth!;
-        polygonProviderUrl = param?.polygon!;
-        bnbProviderUrl = param?.bnb!; 
+        ethProviderUrl = param?.eth? param?.eth : ethProviderUrl;
+        polygonProviderUrl = param?.polygon? param?.polygon : polygonProviderUrl;
+        bnbProviderUrl = param?.bnb? param?.bnb : bnbProviderUrl; 
         suiProviderUrl = param?.sui? param?.sui : suiProviderUrl;
     }
     public async setProviderUrl(param: ProviderUrlsProps) {
-        ethProviderUrl = param.eth?param.eth:ethProviderUrl;
-        polygonProviderUrl = param.polygon?param.polygon: polygonProviderUrl;
-        bnbProviderUrl = param.bnb? param.bnb : bnbProviderUrl;    
+        ethProviderUrl = param?.eth? param?.eth : ethProviderUrl;
+        polygonProviderUrl = param?.polygon? param?.polygon : polygonProviderUrl;
+        bnbProviderUrl = param?.bnb? param?.bnb : bnbProviderUrl; 
         suiProviderUrl = param.sui? param?.sui: suiProviderUrl;
     }
 
