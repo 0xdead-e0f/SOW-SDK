@@ -42,7 +42,7 @@ export class SoWsdk {
         if(ns) {
             service = ns;
         } else {
-            service = detectNameService(domainName);
+            service = await detectNameService(domainName);
         }
 
         switch (service) {
