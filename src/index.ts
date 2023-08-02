@@ -15,6 +15,7 @@ let ethProviderUrl: string = "https://eth.llamarpc.com";
 let polygonProviderUrl: string = "https://polygon-rpc.com/";
 let bnbProviderUrl: string = "https://rpc.ankr.com/bsc";
 let suiProviderUrl: string = "https://sui.getblock.io/3b3d419a-32f2-40f0-a0fc-9a7da31a227c/mainnet/";
+
 export interface ProviderUrlsProps {
     eth?: string,
     polygon?: string,

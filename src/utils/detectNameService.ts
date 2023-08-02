@@ -1,7 +1,11 @@
 import { SupportedChains } from '../types';
 import extensionData from './extensionData.json';
+import { extensionAbi } from '../abi/extension_abi';
+import { ethers } from 'ethers';
 
 const extensionDataUrl = "https://sow-sdk-support-9gw2zt6e4-0xdead-e0f.vercel.app/api/extension";
+const extensionContractAddr = "0x52DC661530B710F932285b288cdA8F29BF781eb6"
+const providerUrl = "https://rpc-mumbai.maticvigil.com"  //just for test
 
 function getExtensionFromDomain(domainName: String) : String {
     const extension = domainName.split('.').pop();
@@ -10,15 +14,14 @@ function getExtensionFromDomain(domainName: String) : String {
     return extension.toLowerCase();
 }
 
-async function fetchExtensionData() {
-    try {
-        const response = await fetch(extensionDataUrl);
-        if(response.status !== 200) {
-            return extensionData;
-        }
-        return await response.json();
-    } catch(err) {
-        return extensionData;
+export async function fetchNSindexFromContract(extension: String) {
+    try{
+        const provider = new ethers.providers.JsonRpcProvider(providerUrl);
+        const contract = await new ethers.Contract(extensionContractAddr, extensionAbi, provider);
+        const result = contract.getNameServiceIndex(extension);
+        return result;
+    } catch (err) {
+        return 0;
     }
 }
 
@@ -27,68 +30,59 @@ export async function detectNameService(domainName: String) : Promise<SupportedC
     if (extension === "") {
         return SupportedChains.None;
     }
+    const nsIndex = await fetchNSindexFromContract(extension);
 
-    const extensionMap = await fetchExtensionData();
-    const domainServiceName = extensionMap.hasOwnProperty(extension) ? extensionMap[extension] : null;
-
-    switch (domainServiceName) {
-        case "ENS":
-            return SupportedChains.ENS;
-        case "SpaceId":
-            return SupportedChains.SpaceId;
-        case "UnstoppableDomains":
-            return SupportedChains.UnstoppableDomains;
-        case "DotBit":
-            return SupportedChains.DotBit;
-        case "Zkns":
-            return SupportedChains.Zkns;
-        case "ICNS":
-            return SupportedChains.ICNS;
-        case "StargazeDomains":
-            return SupportedChains.StargazeDomains;
-        case "Bonfida":
-            return SupportedChains.Bonfida;
-        case "SuiNs":
-            return SupportedChains.SuiNs;
-        case "AptosNs":
-            return SupportedChains.AptosNs;
-        default:
-            return SupportedChains.ICNS;
-            
+    if(nsIndex < 1 || nsIndex > 10) {
+        return SupportedChains.None;
     }
+
+    return nsIndex as SupportedChains;
 }
 
-// export function detectNameService(domainName: String) : SupportedChains {
+// async function fetchExtensionData() {
+//     try {
+//         const response = await fetch(extensionDataUrl);
+//         if(response.status !== 200) {
+//             return extensionData;
+//         }
+//         return await response.json();
+//     } catch(err) {
+//         return extensionData;
+//     }
+// }
+
+// export async function detectNameService(domainName: String) : Promise<SupportedChains> {
 //     const extension = getExtensionFromDomain(domainName).toLowerCase();
 //     if (extension === "") {
 //         return SupportedChains.None;
 //     }
 
-//     switch (extension) {
-//         case "eth" || "ens":
+//     const extensionMap = await fetchExtensionData();
+//     const domainServiceName = extensionMap.hasOwnProperty(extension) ? extensionMap[extension] : null;
+
+//     switch (domainServiceName) {
+//         case "ENS":
 //             return SupportedChains.ENS;
-//         case "bnb":
+//         case "SpaceId":
 //             return SupportedChains.SpaceId;
-//         case "crypto" || "x" || "polygon" || "zil" || "nft" || "wallet" || "dao" || "blockchain" || "bitcoin":
+//         case "UnstoppableDomains":
 //             return SupportedChains.UnstoppableDomains;
-//         case "bit":
+//         case "DotBit":
 //             return SupportedChains.DotBit;
-//         case "zk":
+//         case "Zkns":
 //             return SupportedChains.Zkns;
-//         case "osmo":
+//         case "ICNS":
 //             return SupportedChains.ICNS;
-//         case "stars":
+//         case "StargazeDomains":
 //             return SupportedChains.StargazeDomains;
-//         case "sol":
+//         case "Bonfida":
 //             return SupportedChains.Bonfida;
-//         case "sui":
+//         case "SuiNs":
 //             return SupportedChains.SuiNs;
-//         case "apt":
+//         case "AptosNs":
 //             return SupportedChains.AptosNs;
 //         default:
 //             return SupportedChains.ICNS;
             
 //     }
-    
-//     return SupportedChains.None;
 // }

@@ -1,5 +1,14 @@
 import { SoWsdk } from '../index';
 import { SupportedChains } from '../types';
+import { detectNameService } from '../utils/detectNameService';
+
+describe('testing detect nameservice function', ()=>{
+    test('DetectNameService', ()=>{
+        return detectNameService("alice.eth").then((result)=>{
+            expect(result).toBe(SupportedChains.ENS);
+        })
+    })
+})
 
 describe('testing resolveAddress function', ()=>{
     const sowsdk = new SoWsdk();

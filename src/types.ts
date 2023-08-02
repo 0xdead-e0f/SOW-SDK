@@ -1,5 +1,5 @@
 export enum SupportedChains {
-    ENS,
+    ENS = 1,
     SpaceId,
     UnstoppableDomains,
     DotBit,
