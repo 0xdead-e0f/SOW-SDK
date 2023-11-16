@@ -2,6 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = require("../index");
 const types_1 = require("../types");
+const detectNameService_1 = require("../utils/detectNameService");
+describe('testing detect nameservice function', () => {
+    test('DetectNameService', () => {
+        return (0, detectNameService_1.detectNameService)("alice.eth").then((result) => {
+            expect(result).toBe(types_1.SupportedChains.ENS);
+        });
+    });
+});
 describe('testing resolveAddress function', () => {
     const sowsdk = new index_1.SoWsdk();
     test('ENS', () => {

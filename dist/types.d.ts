@@ -1,13 +1,13 @@
 export declare enum SupportedChains {
-    ENS = 0,
-    SpaceId = 1,
-    UnstoppableDomains = 2,
-    DotBit = 3,
-    Zkns = 4,
-    ICNS = 5,
-    StargazeDomains = 6,
-    Bonfida = 7,
-    SuiNs = 8,
-    AptosNs = 9,
-    None = 10
+    ENS = 1,
+    SpaceId = 2,
+    UnstoppableDomains = 3,
+    DotBit = 4,
+    Zkns = 5,
+    ICNS = 6,
+    StargazeDomains = 7,
+    Bonfida = 8,
+    SuiNs = 9,
+    AptosNs = 10,
+    None = 11
 }

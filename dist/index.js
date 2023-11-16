@@ -48,7 +48,7 @@ class SoWsdk {
                 service = ns;
             }
             else {
-                service = (0, detectNameService_1.detectNameService)(domainName);
+                service = yield (0, detectNameService_1.detectNameService)(domainName);
             }
             switch (service) {
                 case types_1.SupportedChains.ENS:

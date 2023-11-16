@@ -1,61 +1,49 @@
 import { Resolution } from '@unstoppabledomains/resolution';
 
-export async function getAddressResolution(domainName: string, ethProviderUrl: string, polygonProviderUrl: string) {
-    try {
-        const resolution = new Resolution({
-            sourceConfig: {
-            uns: {
-                locations: {
-                Layer1: {
-                    url: ethProviderUrl,
-                    network: 'mainnet',
-                },
-                Layer2: {
-                    url: polygonProviderUrl,
-                    network: 'polygon-mainnet',
-                },
-                },
-            },
-            zns: {
-                url: 'https://api.zilliqa.com',
-                network: 'mainnet',
-            },
-            },
-        });
+export async function getAddressResolution(
+  domainName: string,
+  endpointUrl: string,
+  ethProviderUrl: string,
+  polygonProviderUrl: string,
+  apiKey: string
+) {
+  try {
+    const query = new URLSearchParams({ $expand: 'records' }).toString();
+    const resp = await fetch(`${endpointUrl}/partner/v3/domains/${domainName}?${query}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+      },
+    });
 
-        const address = await resolution.addr(domainName, 'ETH')
-        return address;
-    } catch (err) {
-        throw err;
-    }
+    const results = await resp.json();
+    console.log(results);
+    return results.records['crypto.ETH.address'];
+  } catch (err) {
+    console.log('unstoppable error', err);
+    throw err;
+  }
 }
 
-export async function getNameResolution(address: string, ethProviderUrl: string, polygonProviderUrl: string) {
-    try {
-        const resolution = new Resolution({
-            sourceConfig: {
-            uns: {
-                locations: {
-                Layer1: {
-                    url: ethProviderUrl,
-                    network: 'mainnet',
-                },
-                Layer2: {
-                    url: polygonProviderUrl,
-                    network: 'polygon-mainnet',
-                },
-                },
-            },
-            zns: {
-                url: 'https://api.zilliqa.com',
-                network: 'mainnet',
-            },
-            },
-        });
+export async function getNameResolution(
+  address: string,
+  endpointUrl: string,
+  ethProviderUrl: string,
+  polygonProviderUrl: string,
+  apiKey: string
+) {
+  try {
+    const resp = await fetch(`${endpointUrl}/resolve/reverse/${address}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+      },
+    });
 
-        const name = await resolution.reverse(address);
-        return name;
-    } catch (err) {
-        throw err;
-    }
+    const data = await resp.json();
+    console.log(data);
+    return data.meta.domain;
+  } catch (err) {
+    throw err;
+  }
 }
